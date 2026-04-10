@@ -3,7 +3,12 @@ import BaseRepository from "./BaseRepository.js";
 class ProductRepository extends BaseRepository {
     async getAll() {
         try {
-            const results = await super.getAll('products');
+            const results = await super.getAll('products', [
+                'id',
+                'name',
+                'prince_in_cents',
+                'size'
+            ]);
             return results;
         } catch (error) {
             throw error;
@@ -12,7 +17,11 @@ class ProductRepository extends BaseRepository {
 
     async getById(id) {
         try {
-            const result = await super.getById('products', id);
+            const result = await super.getById(
+                'products',
+                ['id', 'name', 'prince_in_cents', 'size'],
+                id
+            );
             return result;
         } catch (error) {
             throw error;
