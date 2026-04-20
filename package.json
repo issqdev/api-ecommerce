@@ -1,14 +1,14 @@
 {
   "name": "ecommercebackend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Projeto de uma API de e-commerce com integração PostgreSQL local e suporte a métodos GET/POST.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node --watch ."
   },
   "keywords": [],
-  "author": "",
+  "author": "Isaque de Oliveira",
   "license": "ISC",
   "type": "module",
   "dependencies": {

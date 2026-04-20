@@ -8,7 +8,18 @@ router
     .get(async (req, res) => {
         const result = await new UserRepository().getAll();
         res.status(200).send(result);
-    });
+    })
+    .post(async (req, res) => {
+        const { body } = req;
+        const columnsArray = ['name', 'surname', 'email'];
+        const valuesArray = columnsArray.reduce((acc, columnName) => {
+            acc.push(body[columnName]);
+            return acc;
+        }, []);
+
+        await new UserRepository().insertOne(valuesArray);
+        res.status(200).send();
+    })
 
 router
     .route('/:id')
@@ -16,6 +27,6 @@ router
         const { id } = req.params;
         const result = await new UserRepository().getById(id);
         res.status(200).send(result);
-    });
+    })
 
 export default router;
