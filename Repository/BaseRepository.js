@@ -19,6 +19,26 @@ class BaseRepository {
             throw error;
         }
     }
+
+    async insertOne(table, columnsArray, valuesArray) {
+        const client = await pool.connect();
+        try {
+            let flagsArray = Array.from(new Array(columnsArray.length).keys()).map(
+                (el) => `$${el + 1}`
+            );
+
+            const queryText = `INSERT INTO ${table} (${columnsArray.join()}) VALUES (${flagsArray.join()})`;
+
+            await client.query('BEGIN TRANSACTION');
+            await client.query(queryText, valuesArray);
+            await client.query('COMMIT');
+        } catch (error) {
+            await client.query('ROLLBACK');
+            throw error;
+        } finally {
+            client.release();
+        }
+    }
 }
 
 export default BaseRepository;
