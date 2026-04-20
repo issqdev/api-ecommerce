@@ -30,12 +30,11 @@ class UserRepository extends BaseRepository {
 
     async insertOne(valuesArray) {
         try {
-            const result = await super.insertOne(
+            await super.insertOne(
                 'users',
                 ['name', 'surname', 'email'],
                 valuesArray
             );
-            return result;
         } catch (error) {
             throw error;
         }
